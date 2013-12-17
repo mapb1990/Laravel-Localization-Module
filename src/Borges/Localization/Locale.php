@@ -39,9 +39,12 @@ class Locale
         $this->locale = $locale;
         $this->config = $config;
 
-        $this->translator->setLocale($this->getDefaultLocale());
-
+        setlocale (LC_ALL, $locale);
         $this->formatter = new LocaleFormatter($this->getLocaleConfigs($locale));
+
+        if($this->config->get('localization::useSessionLanguage')) {
+            app('session')->put('locale', $locale);
+        }
     }
 
     /**
@@ -53,9 +56,15 @@ class Locale
     public function setLocale($locale)
     {
         $this->locale = $locale;
+        setlocale (LC_ALL, $locale);
 
         // update formatter
         $this->formatter->updateFormater($this->getLocaleConfigs($locale));
+
+        // update session
+        if($this->config->get('localization::useSessionLanguage')) {
+            app('session')->put('locale', $locale);
+        }
     }
 
     /**

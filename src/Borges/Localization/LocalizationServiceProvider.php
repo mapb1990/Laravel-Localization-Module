@@ -46,7 +46,7 @@ class LocalizationServiceProvider extends ServiceProvider {
     {
         $this->app->bindShared('locale', function($app)
         {
-            $locale = new Locale($app['translator'], $app['config'], $app['config']['localization::locale']);
+            $locale = new Locale($app['translator'], $app['config'], $app['translator']->locale());
 
             return $locale;
         });
@@ -66,7 +66,7 @@ class LocalizationServiceProvider extends ServiceProvider {
             // When registering the translator component, we'll need to set the default
             // locale as well as the fallback locale. So, we'll grab the application
             // configuration so we can easily get both of these values from there.
-            $locale = $app['config']['localization::locale'];
+            $locale = $this->getDefaultLocale($app);
 
             $system_locale = false;
             if($app['config']['localization::useDefault']) {
@@ -101,6 +101,26 @@ class LocalizationServiceProvider extends ServiceProvider {
         $this->app['events']->listen('locale.changed', function($locale) {
             $this->app['locale']->setLocale($locale);
         });
+    }
+
+    protected function getDefaultLocale($app)
+    {
+        if(is_callable($app['config']['localization::useUserLanguage'])
+                and in_array($app['config']['localization::useUserLanguage'], $app['config']['localization::availableLocales'])) {
+            return $app['config']['localization::useUserLanguage'];
+        } elseif($app['config']['localization::useSessionLanguage'] 
+                and app('session')->has('locale') and in_array(app('session')->get('locale'), $app['config']['localization::availableLocales'])) {
+            return app('session')->get('locale');
+        } elseif ($app['config']['localization::useBrowserLanguage']) {
+            $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 5);
+            if (in_array($lang, $app['config']['localization::availableLocales'])) {
+                return $lang;
+            } elseif (in_array(substr($lang, 0, 2), $app['config']['localization::availableLocales'])) {
+                return substr($lang, 0, 2);
+            }
+        }
+
+        return $app['config']['localization::locale'];
     }
 
 	/**

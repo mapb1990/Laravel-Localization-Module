@@ -16,7 +16,7 @@ return array(
     'locale'           => 'en',
 
     // Use default language if the translation line doesn't exist
-    'useDefault'       => false,
+    'useDefault'       => true,
 
     // Languages that are allowed in routes
     'availableLocales' => array('en', 'en-US', 'pt'),
