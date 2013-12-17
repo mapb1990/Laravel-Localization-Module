@@ -21,7 +21,6 @@ class LocalizationServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('borges/localization');
-        include __DIR__ . '\helpers.php';
     }
 
     /**

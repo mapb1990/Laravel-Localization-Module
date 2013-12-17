@@ -5,7 +5,8 @@
     "authors": [
         {
             "name": "Miguel Borges",
-            "email": "miguelborges@miguelborges.com"
+            "email": "miguelborges@miguelborges.com",
+            "homepage": "http://www.miguelborges.com"
         }
     ],
     "homepage": "https://github.com/mapb1990/Laravel-Localization-Module/",
@@ -20,7 +21,8 @@
         "nesbot/Carbon": "*"
     },
     "autoload": {
-        "classmap": [
+        "files": [
+            "src/Borges/Localization/helpers.php"
         ],
         "psr-0": {
             "Borges\\Localization\\": "src/"
