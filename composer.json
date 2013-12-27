@@ -2,6 +2,7 @@
     "name": "borges/localization",
     "description": "Easy i18n localization for Laravel 4.",
     "keywords": ["laravel", "localization", "translation", "i18n", "borges"],
+    "license": "MIT",
     "authors": [
         {
             "name": "Miguel Borges",
