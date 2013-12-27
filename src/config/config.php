@@ -19,7 +19,7 @@ return array(
     'useDefault'       => true,
 
     // Languages that are allowed in routes
-    'availableLocales' => array('en', 'en-US', 'pt'),
+    'availableLocales' => array('en'), // array('en', 'en-US', 'pt'),
 
     /*
     |--------------------------------------------------------------------------
