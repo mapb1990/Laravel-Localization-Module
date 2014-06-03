@@ -56,13 +56,16 @@ return array(
 ```
 
 ```php
+App::setLocale('en');
 echo Lang::get('app.welcome');  # prints 'Welcome'
 echo Lang::get('app.color');  # prints 'Colour'
 echo Lang::get('app.hello');  # prints 'Hello'
+
 App::setLocale('en-US');
 echo Lang::get('app.welcome');  # prints 'Welcome'
 echo Lang::get('app.color');  # prints 'Color'
 echo Lang::get('app.hello');  # prints 'Hello'
+
 App::setLocale('pt');
 echo Lang::get('app.welcome');  # prints 'Bem-vindo'
 echo Lang::get('app.color');  # prints 'Cor'
@@ -78,13 +81,16 @@ This package provides a local resource formatter for dates and numbers.
 #### Example    
 
 ```php
+App::setLocale('en');
 echo Locale::number(1234567.890); # prints '1, 234, 567.89'
 echo Locale::int(1234567.890); # prints '1, 234, 568'
 echo Locale::date(Carbon\Carbon::now()); # prints 'Tuesday, December 17, 2013'
+
 App::setLocale('en-US');
 echo Locale::number(1234567.890); # prints '1, 234, 567.89'
 echo Locale::int(1234567.890); # prints '1, 234, 568'
 echo Locale::date(Carbon\Carbon::now()); # prints 'Tuesday, December 17, 2013'
+
 App::setLocale('pt');
 echo Locale::number(1234567.890); # prints '1 234 567,89'
 echo Locale::int(1234567.890); # prints '1 234 568'
